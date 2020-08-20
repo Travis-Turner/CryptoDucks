@@ -26,10 +26,17 @@
   margin-top: 12px;
   margin-bottom: 6px;
 }
+.register__button-container {
+  display: flex;
+  justify-content: center;
+}
 .register__link {
   color: #02FF00;
   text-align: center;
   margin-top: 32px;
+  width: 20%;
+  background-color: black;
+  border: none;
 }
 .register__signin {
   display: flex;

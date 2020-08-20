@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Button } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo.js';
 import './styles/Register.css';
@@ -8,8 +8,21 @@ class Register extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      confirmedPassword: '',
+      number: ''
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(e) {
+    const {name, value} = e.target;
+    this.setState({
+      [name]: value 
+    });
+  }
+  handleSubmit(){
+    console.log(this.state);
   }
   render(){
     return(
@@ -22,24 +35,26 @@ class Register extends React.Component {
           <label>
             Username:
           </label>
-          <input type="text" value={this.state.username} onChange={this.handleChange} />
+          <input name="username" type="text" value={this.state.username} onChange={this.handleChange} />
           <label>
             Password:
           </label>
-          <input type="password" value={this.state.password} onChange={this.handleChange} />
+          <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
           <label>
             Confirm password:
           </label>
-          <input type="password" value={this.state.password} onChange={this.handleChange} />
+          <input name="confirmedPassword" type="password" value={this.state.confirmedPassword} onChange={this.handleChange} />
           <label>
             Number of cryptoduck sightings:
           </label>
-          <input type="text" value={this.state.username} onChange={this.handleChange} />
+          <input name="number" type="number" value={this.state.number} onChange={this.handleChange} />
         </form>
-        <Link className="register__link">Sign up</Link>
+        <div className="register__button-container">
+          <button onClick={this.handleSubmit} className="register__link">Sign up</button>
+        </div>
         <div className="register__signin">
           <p>Already a member?</p>
-          <Link className="register__login-link">Log in here</Link>
+          <Link to="login" className="register__login-link">Log in here</Link>
         </div>
       </div>
     )

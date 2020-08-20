@@ -32,7 +32,7 @@ class Login extends React.Component {
         <Link className="login__link">Log in</Link>
         <div className="login__signup">
           <p>Not a member yet?</p>
-          <Link className="signup__link">Sign up here</Link>
+          <Link to="/register" className="signup__link">Sign up here</Link>
         </div>
       </div>
     )
