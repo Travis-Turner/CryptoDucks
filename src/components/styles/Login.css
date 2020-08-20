@@ -43,3 +43,15 @@
 .signup__link {
   color: white;
 }
+.login__button-container {
+  display: flex;
+  justify-content: center;
+}
+.login__link {
+  color: #02FF00;
+  text-align: center;
+  margin-top: 32px;
+  width: 20%;
+  background-color: black;
+  border: none;
+}

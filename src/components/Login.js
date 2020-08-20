@@ -1,15 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo.js';
+import * as duckAuth from '../duckAuth.js';
 import './styles/Login.css';
 
 class Login extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: ''
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(e) {
+    const {name, value} = e.target;
+    this.setState({
+      [name]: value 
+    });
+  }
+  handleSubmit(){
+    duckAuth.authFormSubmit(this.state.email, this.state.password);
   }
   render(){
     return(
@@ -21,15 +33,17 @@ class Login extends React.Component {
         </p>
         <form className="login__form">
           <label>
-            Username:
+            Email:
           </label>
-          <input type="text" value={this.state.username} onChange={this.handleChange} />
+          <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
           <label>
             Password:
           </label>
-          <input type="password" value={this.state.password} onChange={this.handleChange} />
+          <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
         </form>
-        <Link className="login__link">Log in</Link>
+        <div className="login__button-container">
+          <button onClick={this.handleSubmit} className="login__link">Log in</button>
+        </div>
         <div className="login__signup">
           <p>Not a member yet?</p>
           <Link to="/register" className="signup__link">Sign up here</Link>

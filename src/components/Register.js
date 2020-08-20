@@ -1,6 +1,7 @@
 import React, { Button } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo.js';
+import * as duckAuth from '../duckAuth.js';
 import './styles/Register.css';
 
 class Register extends React.Component {
@@ -22,27 +23,9 @@ class Register extends React.Component {
     });
   }
   handleSubmit(){
-    const BASE_URL = 'https://api.nomoreparties.co';
-    const register = (username, password, email) => {
-      return fetch(`${BASE_URL}/auth/local/register`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username, password, email})
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .then((res) => {
-        return res;
-        console.log(res);
-      })
-      .catch((err) => console.log(err))
-    }
+    
     if (this.state.password === this.state.confirmPassword){
-      register(this.state.username, this.state.password, this.state.email);
+      duckAuth.register(this.state.username, this.state.password, this.state.email);
     }
   }
   render(){
