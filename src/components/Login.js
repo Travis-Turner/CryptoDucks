@@ -22,8 +22,17 @@ class Login extends React.Component {
     });
   }
   handleSubmit(){
-    duckAuth.authFormSubmit(this.state.email, this.state.password, this.props.history);
-    this.setState({email: '', password: ''});
+    if (!this.state.email || !this.state.password){
+      return;
+    }
+    duckAuth.authFormSubmit(this.state.email, this.state.password)
+      .then(() => {
+        this.setState({email: '', password: ''} ,() => {
+          this.props.handleLogin()
+          this.props.history.push('/ducks');
+        })
+      })
+      
   }
   render(){
     return(
@@ -37,11 +46,11 @@ class Login extends React.Component {
           <label>
             Email:
           </label>
-          <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
+          <input required name="email" type="text" value={this.state.email} onChange={this.handleChange} />
           <label>
             Password:
           </label>
-          <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
+          <input required name="password" type="password" value={this.state.password} onChange={this.handleChange} />
         </form>
         <div className="login__button-container">
           <button onClick={this.handleSubmit} className="login__link">Log in</button>

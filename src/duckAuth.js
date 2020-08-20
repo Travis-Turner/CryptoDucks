@@ -13,7 +13,7 @@ export const register = (username, password, email, history) => {
     return response.json();
   })
   .then((res) => {
-    history.push('/login');
+    history.push('/login')
     return res;
   })
   .catch((err) => console.log(err))
@@ -34,7 +34,9 @@ export const authorize = (identifier, password) => {
 export const authFormSubmit = (email, password, history) => {
   authorize(email, password)
       .then((data) => localStorage.setItem('jwt', data.jwt))
-      .then(()=> history.push('/ducks'))
+      return new Promise((resolve, reject) => {
+        resolve();
+      })
 };
 export const getContent = (token, endpoint) => {
   return fetch(`${BASE_URL}${endpoint}`, {
