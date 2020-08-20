@@ -8,9 +8,9 @@ class Register extends React.Component {
     super(props);
     this.state = {
       username: '',
+      email: '',
       password: '',
-      confirmedPassword: '',
-      number: ''
+      confirmPassword: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +22,28 @@ class Register extends React.Component {
     });
   }
   handleSubmit(){
-    console.log(this.state);
+    const BASE_URL = 'https://api.nomoreparties.co';
+    const register = (username, password, email) => {
+      return fetch(`${BASE_URL}/auth/local/register`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username, password, email})
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        return res;
+        console.log(res);
+      })
+      .catch((err) => console.log(err))
+    }
+    if (this.state.password === this.state.confirmPassword){
+      register(this.state.username, this.state.password, this.state.email);
+    }
   }
   render(){
     return(
@@ -37,17 +58,17 @@ class Register extends React.Component {
           </label>
           <input name="username" type="text" value={this.state.username} onChange={this.handleChange} />
           <label>
+            Email:
+          </label>
+          <input name="email" type="email" value={this.state.email} onChange={this.handleChange} />
+          <label>
             Password:
           </label>
           <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
           <label>
             Confirm password:
           </label>
-          <input name="confirmedPassword" type="password" value={this.state.confirmedPassword} onChange={this.handleChange} />
-          <label>
-            Number of cryptoduck sightings:
-          </label>
-          <input name="number" type="number" value={this.state.number} onChange={this.handleChange} />
+          <input name="confirmPassword" type="password" value={this.state.confirmPassword} onChange={this.handleChange} />
         </form>
         <div className="register__button-container">
           <button onClick={this.handleSubmit} className="register__link">Sign up</button>
