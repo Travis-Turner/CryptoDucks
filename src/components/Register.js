@@ -1,5 +1,5 @@
 import React, { Button } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Logo from './Logo.js';
 import * as duckAuth from '../duckAuth.js';
 import './styles/Register.css';
@@ -23,9 +23,8 @@ class Register extends React.Component {
     });
   }
   handleSubmit(){
-    
     if (this.state.password === this.state.confirmPassword){
-      duckAuth.register(this.state.username, this.state.password, this.state.email);
+      duckAuth.register(this.state.username, this.state.password, this.state.email, this.props.history);
     }
   }
   render(){
@@ -65,4 +64,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default withRouter(Register);
