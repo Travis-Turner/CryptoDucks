@@ -14,7 +14,7 @@ class Login extends React.Component {
   render(){
     return(
       <div className="login">
-        <Logo />
+        <Logo title={'CryptoDucks'}/>
         <p className="login__welcome">
           This app contains highly sensitive information. 
           Please sign in or register to access CryptoDucks.

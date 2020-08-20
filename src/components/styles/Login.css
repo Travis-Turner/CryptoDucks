@@ -4,6 +4,7 @@
   flex-direction: column;
   padding: 36px;
   justify-content: center;
+  width: 50%;
 }
 .login__welcome {
   margin-top: 32px;
