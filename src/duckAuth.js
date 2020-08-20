@@ -30,11 +30,10 @@ export const authorize = (identifier, password) => {
   .then(res => res)
   .catch(err => console.log(err))
 };
-export const authFormSubmit = (email, password) => {
-  console.log(email, password);
+export const authFormSubmit = (email, password, history) => {
   authorize(email, password)
       .then((data) => localStorage.setItem('jwt', data.jwt))
-      .then(()=> alert('JWT in LocalStorage'))
+      .then(()=> history.push('/ducks'))
 };
 export const getContent = (token, endpoint) => {
   return fetch(`${BASE_URL}${endpoint}`, {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Logo from './Logo.js';
 import * as duckAuth from '../duckAuth.js';
 import './styles/Login.css';
@@ -13,6 +13,7 @@ class Login extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
   handleChange(e) {
     const {name, value} = e.target;
@@ -21,7 +22,7 @@ class Login extends React.Component {
     });
   }
   handleSubmit(){
-    duckAuth.authFormSubmit(this.state.email, this.state.password);
+    duckAuth.authFormSubmit(this.state.email, this.state.password, this.props.history);
   }
   render(){
     return(
@@ -53,4 +54,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

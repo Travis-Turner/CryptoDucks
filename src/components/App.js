@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Login from './Login.js';
 import Register from './Register.js';
 import Ducks from './Ducks.js';
@@ -8,7 +8,18 @@ import ProtectedRoute from './ProtectedRoute';
 import './styles/App.css';
 
 function App() {
-  const loggedIn = false;
+  const [loggedIn, setLoggedIn] = useState(false);
+  const history = useHistory();
+  console.log('loggedinapp', loggedIn);
+  useEffect(() => {
+    let jwt = localStorage.getItem('jwt');
+    if (jwt){
+      setLoggedIn(true);
+      history.push("/ducks");
+    } else {
+      setLoggedIn(false);
+    }
+  });
     return (
       <Switch>
         <ProtectedRoute path="/ducks" loggedIn={loggedIn} component={Ducks} />
@@ -22,9 +33,6 @@ function App() {
           <div className="loginContainer">
             <Login />
           </div>
-        </Route>
-        <Route path="/">
-          {loggedIn ? <Redirect to="/ducks" /> : <Redirect to="/register" />}
         </Route>
       </Switch>
     )

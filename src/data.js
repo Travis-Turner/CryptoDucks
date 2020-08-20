@@ -4,7 +4,7 @@ const data = {
     {
     "id": 0,
     "name": "Dog Duck",
-    "description": "This rare duck has been spotted on a number of occassions throughout central Europe. It is said to enjoy playing with old socks that it finds in the water. Tanya Peterson was 25 when she saw this duck, she reported, \"It was quite a friendly little fellow. At no time did I feel any fear. I stayed with him for maybe 15 or 20 minutes, then zoom! He zipped out of the water and across the night sky like a comet.\"",
+    "description": "This rare duck has been spotted on a number of occasions throughout central Europe. It is said to enjoy playing with old socks that it finds in the water. Tanya Peterson was 25 when she saw this duck, she reported, \"It was quite a friendly little fellow. At no time did I feel any fear. I stayed with him for maybe 15 or 20 minutes, then zoom! He zipped out of the water and across the night sky like a comet.\"",
     "img": "/duck-images/dog-duck.png"
     },
     {
