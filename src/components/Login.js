@@ -23,6 +23,7 @@ class Login extends React.Component {
   }
   handleSubmit(){
     duckAuth.authFormSubmit(this.state.email, this.state.password, this.props.history);
+    this.setState({email: '', password: ''});
   }
   render(){
     return(
