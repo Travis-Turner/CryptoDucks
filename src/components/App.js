@@ -2,12 +2,13 @@ import React from 'react';
 import Login from './Login.js';
 import Register from './Register.js';
 import Ducks from './Ducks.js';
+import MyProfile from './MyProfile.js';
 import './styles/App.css';
 
 function App() {
   return (
     <div className="App">
-      <Ducks />
+      <MyProfile />
     </div>
   );
 }
