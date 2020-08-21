@@ -63,15 +63,18 @@ class App extends React.Component {
       <Switch>
         <ProtectedRoute path="/ducks" loggedIn={this.state.loggedIn} component={Ducks} />
         <ProtectedRoute path="/my-profile" loggedIn={this.state.loggedIn} userData={this.state.userData} component={MyProfile} />
+        <Route path="/login">
+          <div className="loginContainer">
+            <Login handleLogin={this.handleLogin} />
+          </div>
+        </Route>
         <Route path="/register">
           <div className="registerContainer">
             <Register />
           </div>
         </Route>
-        <Route path="/login">
-          <div className="loginContainer">
-            <Login handleLogin={this.handleLogin} />
-          </div>
+        <Route>
+          {this.state.loggedIn ? <Redirect to="/ducks" /> : <Redirect to="/login" />}
         </Route>
       </Switch>
     )
