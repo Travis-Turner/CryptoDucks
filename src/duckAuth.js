@@ -34,7 +34,6 @@ export const authorize = (identifier, password) => {
 export const authFormSubmit = (email, password) => {
   authorize(email, password)
       .then((data) => {
-        console.log('data', data);
         localStorage.setItem('jwt', data.jwt);
         const userData = {
           email: data.user.email,

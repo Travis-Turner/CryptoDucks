@@ -40,6 +40,7 @@ class App extends React.Component {
           // the JWT token was valid, the user is verified
           res.json().then((res) => {
             this.setState({loggedIn: true}, () => {
+              this.getUserData()
               this.props.history.push("/ducks");
             });
           })
@@ -48,11 +49,20 @@ class App extends React.Component {
       })
     }
   }
+  getUserData() {
+    if (localStorage.getItem('userData')){
+      this.setState({
+        userData: JSON.parse(localStorage.getItem('userData'))
+      }, () => {
+        console.log(this.state.userData)
+      })
+    }
+  }
   render(){
     return (
       <Switch>
         <ProtectedRoute path="/ducks" loggedIn={this.state.loggedIn} component={Ducks} />
-        <ProtectedRoute path="/my-profile" loggedIn={this.state.loggedIn} component={MyProfile} />
+        <ProtectedRoute path="/my-profile" loggedIn={this.state.loggedIn} userData={this.state.userData} component={MyProfile} />
         <Route path="/register">
           <div className="registerContainer">
             <Register />

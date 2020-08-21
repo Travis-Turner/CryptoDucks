@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from './NavBar.js';
 import './styles/MyProfile.css';
 
-function MyProfile () {
+function MyProfile (props) {
   return (
     <>
       <NavBar />
@@ -15,11 +15,11 @@ function MyProfile () {
           <div className="my-profile__info">
             <div className="my-profile__user">
               <p className="my-profile__key">Username:</p>
-              <p className="my-profile__value">Username here</p>
+              <p className="my-profile__value">{props.userData.username}</p>
             </div>
             <div className="my-profile__user">
-              <p className="my-profile__key">Number of cryptoduck sightings:</p>
-              <p className="my-profile__value">Sightings here</p>
+              <p className="my-profile__key">Email:</p>
+              <p className="my-profile__value">{props.userData.email}</p>
             </div>
           </div>
         </div>

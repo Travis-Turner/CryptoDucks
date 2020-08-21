@@ -1,14 +1,15 @@
 import React from 'react';
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ component: Component, loggedIn, ...rest  }) => {
-    console.log('logged in value', loggedIn);
+const ProtectedRoute = ({ component: Component, loggedIn, userData, ...rest  }) => {
     return (
-    <Route {...rest} render={(props) => (
-        loggedIn === true
-            ? <Component {...props} />
-            : <Redirect to='/register' />
-    )} />
+    <Route>
+        {(props) => {
+            return ( 
+                loggedIn === true ? <Component userData={userData} {...props} /> : <Redirect to="./register" />
+            )
+        }}
+    </Route>
 )}
 
 export default ProtectedRoute;
