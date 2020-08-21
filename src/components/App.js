@@ -53,8 +53,6 @@ class App extends React.Component {
     if (localStorage.getItem('userData')){
       this.setState({
         userData: JSON.parse(localStorage.getItem('userData'))
-      }, () => {
-        console.log(this.state.userData)
       })
     }
   }
@@ -82,17 +80,3 @@ class App extends React.Component {
   }
 
 export default withRouter(App);
-
-
-/*
-
-*/
-
-/*
-  
-
-*/
-
-/*
-  
-*/

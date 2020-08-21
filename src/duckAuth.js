@@ -45,19 +45,4 @@ export const authFormSubmit = (email, password) => {
         resolve();
       })
 };
-export const getContent = (token) => {
-  console.log('token', token);
-  return fetch(`${BASE_URL}/Users`, {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-  .then((res) => {
-    console.log(res.json())
-    console.log('get content');
-  })
-  .then((data) => {
-    console.log(data);
-  })
-}
+
