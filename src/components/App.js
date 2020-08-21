@@ -5,6 +5,7 @@ import Register from './Register.js';
 import Ducks from './Ducks.js';
 import MyProfile from './MyProfile.js';
 import ProtectedRoute from './ProtectedRoute';
+import * as duckAuth from '../duckAuth.js';
 import './styles/App.css';
 
 class App extends React.Component {
@@ -13,16 +14,39 @@ class App extends React.Component {
     this.state = {
       loggedIn: false
     }
+    this.tokenCheck = this.tokenCheck.bind(this);
   }
   componentDidMount() {
-    if (localStorage.getItem('jwt')){
-      this.setState({loggedIn: true}, () => {
-        this.props.history.push("/ducks");
-      })
-    }
+    // we'll check the token when the user returns
+    this.tokenCheck();
   };
   handleLogin = () => {
-    this.setState({loggedIn: true});
+    // we'll also check the token when the user logs in
+    this.tokenCheck();
+  }
+  tokenCheck = () => {
+    // if the user aleady has a token in localStorage,
+    // this function will check that the user has a valid token
+    if (localStorage.getItem('jwt')){
+      let jwt = localStorage.getItem('jwt');
+      fetch(`${duckAuth.BASE_URL}/En-crypto-ducks`, {
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+        }
+      }).then((res) => {
+        if (!res.ok){
+          // if there JWT token was not valid, the response is rejected
+        } else {
+          // the JWT token was valid, the user is verified
+          res.json().then((res) => {
+            this.setState({loggedIn: true}, () => {
+              this.props.history.push("/ducks");
+            });
+          })
+        }
+        
+      })
+    }
   }
   render(){
     return (

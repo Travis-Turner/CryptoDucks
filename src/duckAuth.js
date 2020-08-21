@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.nomoreparties.co';
+export const BASE_URL = 'https://api.nomoreparties.co';
 
 export const register = (username, password, email, history) => {
   return fetch(`${BASE_URL}/auth/local/register`, {
@@ -31,22 +31,34 @@ export const authorize = (identifier, password) => {
   .then(res => res)
   .catch(err => console.log(err))
 };
-export const authFormSubmit = (email, password, history) => {
+export const authFormSubmit = (email, password) => {
   authorize(email, password)
-      .then((data) => localStorage.setItem('jwt', data.jwt))
+      .then((data) => {
+        console.log('data', data);
+        localStorage.setItem('jwt', data.jwt);
+        const userData = {
+          email: data.user.email,
+          username: data.user.username
+        }
+        localStorage.setItem('userData', JSON.stringify(userData));
+      });
       return new Promise((resolve, reject) => {
         resolve();
       })
 };
-export const getContent = (token, endpoint) => {
-  return fetch(`${BASE_URL}${endpoint}`, {
+export const getContent = (token) => {
+  console.log('token', token);
+  return fetch(`${BASE_URL}/Users`, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     }
   })
-  .then(res => res.json())
-  .then(data => data)
+  .then((res) => {
+    console.log(res.json())
+    console.log('get content');
+  })
+  .then((data) => {
+    console.log(data);
+  })
 }
